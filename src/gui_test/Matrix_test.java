@@ -37,20 +37,19 @@ public class Matrix_test {
 		//for(i=0;i<5;i++) for (j=0;j<5;j++) tab[]
 		int[] ran;
 		ran=getrad();
-		tab[0][0]=ran[0];
-		tab[0][1]=ran[1];
-		tab[0][2]=ran[3];
-		tab[1][0]=ran[4];
-		tab[1][1]=ran[5];
-		tab[2][0]=ran[2];
+		tab[0][0]=-1*ran[0];
+		tab[0][1]=-1*ran[1];
+		tab[0][2]=-1*ran[3];
+		tab[1][0]=-1*ran[4];
+		tab[1][1]=-1*ran[5];
 		
-		ran=getrad();
-		tab[4][5]=ran[0];
-		tab[5][4]=ran[1];
-		tab[5][5]=ran[3];
-		tab[5][3]=ran[4];
-		tab[4][4]=ran[5];
-		tab[3][5]=ran[2];
+		int[] ran1=getrad();
+		tab[3][4]=ran1[0];
+		tab[4][4]=ran1[1];
+		tab[4][3]=ran1[3];
+		tab[4][2]=ran1[4];
+		tab[2][4]=ran1[5];
+		tab[3][3]=ran1[2];
 		// TODO Auto-generated constructor stub
 	}
 

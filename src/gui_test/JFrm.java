@@ -45,8 +45,8 @@ public class JFrm extends JFrame implements ActionListener{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//JFrm App1 = new JFrm();
-		//App1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrm App1 = new JFrm();
+		App1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Matrix_test m=new Matrix_test();
 		m.print();
 		//new
