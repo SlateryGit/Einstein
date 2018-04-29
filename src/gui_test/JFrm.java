@@ -1,5 +1,6 @@
 package gui_test;
 import java.awt.Container;
+//import java.util.Scanner;
 import java.awt.GridLayout;
 import java.awt.event.*;
 //import java.awt.event.ActionListener;
@@ -11,7 +12,7 @@ public class JFrm extends JFrame implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton buttons[];
+	private JButton buttons[][];
 	private Container container;
 	private GridLayout jfr1;
 	//grid1 = new Grid
@@ -26,22 +27,28 @@ public class JFrm extends JFrame implements ActionListener{
 		jfr1 = new GridLayout(5, 5, 1, 1);
 		container=getContentPane();
 		container.setLayout(jfr1);
-		buttons = new JButton[25];
-		int i;
-		for(i=0;i<25;i++) {
-			buttons[i]=new JButton("0");
-			//buttons[i].addActionListener(this);
-			container.add(buttons[i]);
+		buttons = new JButton[5][5];
+		char i,j;
+		for(i=0;i<5;i++) {
+			for(j=0;j<5;j++) {
+				String s="0";
+				;
+				buttons[i][j]=new JButton(s);
+				//buttons[i].addActionListener(this);
+				container.add(buttons[i][j]);
+			}
 		}
-		
+		//Scanner s=new Scanner(System.);
 		setVisible(true);
 	}
 	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		JFrm App1 = new JFrm();
-		App1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//JFrm App1 = new JFrm();
+		//App1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Matrix_test m=new Matrix_test();
+		m.print();
 		//new
 	}
 
