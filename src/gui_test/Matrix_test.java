@@ -42,6 +42,7 @@ public class Matrix_test {
 		tab[0][2]=-1*ran[3];
 		tab[1][0]=-1*ran[4];
 		tab[1][1]=-1*ran[5];
+		tab[2][0]=-1*ran[2];
 		
 		int[] ran1=getrad();
 		tab[3][4]=ran1[0];
@@ -51,6 +52,12 @@ public class Matrix_test {
 		tab[2][4]=ran1[5];
 		tab[3][3]=ran1[2];
 		// TODO Auto-generated constructor stub
+	}
+	public Matrix_test(int[][] tab1) {
+		tab = new int[5][5];
+		//Éî¿½±´
+		int i,j;
+		for(i=0;i<5;i++) for(j=0;j<5;j++) tab[i][j]=tab1[i][j];
 	}
 
 }

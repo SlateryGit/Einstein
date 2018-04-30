@@ -49,13 +49,6 @@ public class JFrm extends JFrame implements ActionListener{
 		App1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Matrix_test m=new Matrix_test();
 		m.print();
-		
-		EvaluFc ct = new EvaluFc(m.tab);
-		System.out.println(ct.Eva(true, m.tab));
-		Matrix_test m2;
-		m2 =new Matrix_test(ct.revert(ct.tab));
-		m2.print();
-		System.out.println(ct.Eva(true, m2.tab));
 		//new
 	}
 
