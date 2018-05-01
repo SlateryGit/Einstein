@@ -67,7 +67,7 @@ public class Matrix_test {
 		tab[0][2]=-5;
 		tab[1][0]=-6;
 		tab[1][1]=-4;
-		tab[2][1]=-3;
+		tab[3][1]=-3;
 		
 		tab[2][3]=1;
 		tab[4][4]=6;

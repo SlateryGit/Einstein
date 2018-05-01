@@ -102,13 +102,15 @@ public class EvaluFc {
 		int adres[]=new int[2];
 		
 		//=========my
-		
+		//3 (3,1) 4(1,1) 5(0,2)
+		//3 =1*12 4=1*12 5=0*12
+		//权值即走到（4，4）的最少步数 4-它
 		for(i=-6;i<0;i++) {
 			adres=checkcs(i);
 			if(adres.length==0) mywei[-1*i]=0;
 			else if((i==-6)||(i==-1)){
-				mywei[-1*i]=10*Math.max((adres[0]), (adres[1]));
-			}else mywei[-1*i]=12*Math.max((adres[0]), (adres[1]));
+				mywei[-1*i]=10*Math.min((adres[0]), (adres[1]));
+			}else mywei[-1*i]=12*Math.min((adres[0]), (adres[1]));
 		}
 		
 		
@@ -119,8 +121,8 @@ public class EvaluFc {
 			adres=checkcs(i);
 			if(adres.length==0) mywei[i]=0;
 			else if((i==6)||(i==1)){
-				emwei[i]=10*Math.max((4-adres[0]), (4-adres[1]));
-			}else emwei[i]=12*Math.max((4-adres[0]), (4-adres[1]));
+				emwei[i]=10*Math.min((4-adres[0]), (4-adres[1]));
+			}else emwei[i]=12*Math.min((4-adres[0]), (4-adres[1]));
 		}
 		for(i=1;i<7;i++) res-=emwei[i];
 		
@@ -157,8 +159,8 @@ public class EvaluFc {
 		
 		int maxcs,nxcs;//权重最大的棋子,次子
 		for(i=maxcs=1;i<6;i++) {
-			if(mywei[maxcs]>mywei[i+1]) {
-				maxcs=i;
+			if(mywei[maxcs]<mywei[i+1]) {
+				maxcs=i+1;
 			}
 		}
 		
@@ -194,54 +196,54 @@ public class EvaluFc {
 				res-=20;
 		}
 		if(mychess>1) {
-			for(i=nxcs=1;i<6;i++) {
-				if(nxcs==maxcs) continue;
-				if(mywei[nxcs]>mywei[i+1]) {
-					nxcs=i;
+			//算第二大
+			int v;
+			
+			for(i=maxcs=nxcs=1;i<7;i++) {
+				v=mywei[i];
+				if(v>mywei[nxcs]) {
+					if(v>=mywei[maxcs]) {
+						nxcs=maxcs;//原来最大值变第二大
+						maxcs=i;//最大值更新为当前值
+					}else {
+						nxcs = i;//当前值为第二大
+					}
 				}
 			}
 		
-		adres=checkcs(-1*nxcs);
-		if(adres[0]*adres[1]>0) {//棋子不在边界
-			int x=adres[0],y=adres[1];
-			int fg=1;
-			if(tab[x-1][y-1]==-1||tab[x-1][y-1]==-6) 
-				res+=5;
-			else if (tab[x-1][y-1]<0) {
-				res-=1;
-				fg =0;
-			}else {
-				res+=6;
-			}
-			if(fg==1) {//斜上有援助
-				if(tab[x-1][y]<0||tab[x][y-1]<0) {
-					res+=3;
-					if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
-						res+=1;
+			adres=checkcs(-1*nxcs);
+			if(adres[0]*adres[1]>0) {//棋子不在边界
+				int x=adres[0],y=adres[1];
+				int fg=1;
+				if(tab[x-1][y-1]==-1||tab[x-1][y-1]==-6) 
+					res+=5;
+				else if (tab[x-1][y-1]<0) {
+					res-=1;
+					fg =0;
+				}else {
+					res+=6;
 				}
-				
-			}else {
-				if(tab[x-1][y]<0||tab[x][y-1]<0) {
-					res+=3;
-					if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
-						res+=8;
+				if(fg==1) {//斜上有援助
+					if(tab[x-1][y]<0||tab[x][y-1]<0) {
+						res+=3;
+						if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
+							res+=1;
+					}
+					
+				}else {
+					if(tab[x-1][y]<0||tab[x][y-1]<0) {
+						res+=3;
+						if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
+							res+=8;
+					}
+					
 				}
-				
-			}
-	
-		}else {
-				res-=10;
-			}	
+		
+			}else {
+					res-=10;
+				}	
 		
 		}
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
