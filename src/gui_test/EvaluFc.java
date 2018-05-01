@@ -47,7 +47,8 @@ public class EvaluFc {
 					 
 			}
 		}
-		return null;
+		adrs=new int[0];
+		return adrs;
 	}
 	//转换角度，旋转180~
 	public int[][] revert(int[][] tab) {
@@ -69,6 +70,7 @@ public class EvaluFc {
 		//isme=0 人（正数代表的）的局面评估
 		//eg. Eva(true,table)用在判断自己ai走的棋子的分析
 		//win =65536 lost = -65535
+		
 		tab = new int[5][5];
 		//深拷贝
 		int i,j;
@@ -81,8 +83,17 @@ public class EvaluFc {
 		if(isme==false) 
 			return Eva(true, revert(table));
 		
+		//==========结局
+		//if()
+		
+		
 		int mychess=ct_ai();
 		int enemy=ct_me();
+		if((mychess==0)||(tab[0][0]>0)) return -65535;
+		if((enemy==0)||(tab[4][4]<0)) return 65536;
+		
+		
+		
 		res+= 10*(mychess-enemy);
 		
 		int mywei[]=new int[7];
@@ -94,10 +105,10 @@ public class EvaluFc {
 		
 		for(i=-6;i<0;i++) {
 			adres=checkcs(i);
-			if(adres==null) mywei[i]=0;
+			if(adres.length==0) mywei[-1*i]=0;
 			else if((i==-6)||(i==-1)){
-				mywei[-1*i]=Math.max((4-adres[0]), (4-adres[1]));
-			}else mywei[-1*i]=2*Math.max((4-adres[0]), (4-adres[1]));
+				mywei[-1*i]=10*Math.max((adres[0]), (adres[1]));
+			}else mywei[-1*i]=12*Math.max((adres[0]), (adres[1]));
 		}
 		
 		
@@ -106,10 +117,10 @@ public class EvaluFc {
 		//==enm
 		for(i=1;i<7;i++) {
 			adres=checkcs(i);
-			if(adres==null) mywei[i]=0;
+			if(adres.length==0) mywei[i]=0;
 			else if((i==6)||(i==1)){
-				mywei[i]=Math.max((adres[0]), (adres[1]));
-			}else mywei[i]=2*Math.max((adres[0]), (adres[1]));
+				emwei[i]=10*Math.max((4-adres[0]), (4-adres[1]));
+			}else emwei[i]=12*Math.max((4-adres[0]), (4-adres[1]));
 		}
 		for(i=1;i<7;i++) res-=emwei[i];
 		
@@ -139,6 +150,98 @@ public class EvaluFc {
 		}else if((tab[4][3]<0)||(tab[3][4]<0)){
 			res-=20;
 		}
+		
+		
+		
+		//res-=25;
+		
+		int maxcs,nxcs;//权重最大的棋子,次子
+		for(i=maxcs=1;i<6;i++) {
+			if(mywei[maxcs]>mywei[i+1]) {
+				maxcs=i;
+			}
+		}
+		
+		adres=checkcs(-1*maxcs);
+		if(adres[0]*adres[1]>0) {//棋子不在边界
+			int x=adres[0],y=adres[1];
+			int fg=1;
+			if(tab[x-1][y-1]==-1||tab[x-1][y-1]==-6) 
+				res+=10;
+			else if (tab[x-1][y-1]<0) {
+				res-=1;
+				fg =0;
+			}else {
+				res+=12;
+			}
+			if(fg==1) {//斜上有援助
+				if(tab[x-1][y]<0||tab[x][y-1]<0) {
+					res+=6;
+					if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
+						res+=2;
+				}
+				
+			}else {
+				if(tab[x-1][y]<0||tab[x][y-1]<0) {
+					res+=5;
+					if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
+						res+=15;
+				}
+				
+			}
+	
+		}else {
+				res-=20;
+		}
+		if(mychess>1) {
+			for(i=nxcs=1;i<6;i++) {
+				if(nxcs==maxcs) continue;
+				if(mywei[nxcs]>mywei[i+1]) {
+					nxcs=i;
+				}
+			}
+		
+		adres=checkcs(-1*nxcs);
+		if(adres[0]*adres[1]>0) {//棋子不在边界
+			int x=adres[0],y=adres[1];
+			int fg=1;
+			if(tab[x-1][y-1]==-1||tab[x-1][y-1]==-6) 
+				res+=5;
+			else if (tab[x-1][y-1]<0) {
+				res-=1;
+				fg =0;
+			}else {
+				res+=6;
+			}
+			if(fg==1) {//斜上有援助
+				if(tab[x-1][y]<0||tab[x][y-1]<0) {
+					res+=3;
+					if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
+						res+=1;
+				}
+				
+			}else {
+				if(tab[x-1][y]<0||tab[x][y-1]<0) {
+					res+=3;
+					if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
+						res+=8;
+				}
+				
+			}
+	
+		}else {
+				res-=10;
+			}	
+		
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

@@ -47,15 +47,43 @@ public class JFrm extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		JFrm App1 = new JFrm();
 		App1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Matrix_test m=new Matrix_test();
+		Matrix_test m;
+		EvaluFc ct;
+		/*
+		m=new Matrix_test(1);
 		m.print();
-		
-		EvaluFc ct = new EvaluFc(m.tab);
+		ct = new EvaluFc(m.tab);
 		System.out.println(ct.Eva(true, m.tab));
-		Matrix_test m2;
-		m2 =new Matrix_test(ct.revert(ct.tab));
-		m2.print();
-		System.out.println(ct.Eva(true, m2.tab));
+		*/
+		m=new Matrix_test(2);
+		m.print();
+		ct = new EvaluFc(m.tab);
+		System.out.println(ct.Eva(true, m.tab));
+		m=new Matrix_test(3);
+		m.print();
+		ct = new EvaluFc(m.tab);
+		System.out.println(ct.Eva(true, m.tab));
+		m=new Matrix_test(4);
+		m.print();
+		ct = new EvaluFc(m.tab);
+		System.out.println(ct.Eva(true, m.tab));
+		m=new Matrix_test(5);
+		m.print();
+		ct = new EvaluFc(m.tab);
+		System.out.println(ct.Eva(true, m.tab));
+		m=new Matrix_test(6);
+		m.print();
+		ct = new EvaluFc(m.tab);
+		System.out.println(ct.Eva(true, m.tab));
+		m=new Matrix_test(7);
+		m.print();
+		ct = new EvaluFc(m.tab);
+		System.out.println(ct.Eva(true, m.tab));
+		
+		
+		
+		
+		
 		//new
 	}
 
