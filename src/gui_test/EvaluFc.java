@@ -187,7 +187,7 @@ public class EvaluFc {
 			if(adres.length==0) mywei[-1*i]=0;
 			else if((i==-6)||(i==-1)){
 				mywei[-1*i]=10*Math.min((adres[0]), (adres[1]));
-			}else mywei[-1*i]=12*Math.min((adres[0]), (adres[1]));
+			}else mywei[-1*i]=10*Math.min((adres[0]), (adres[1]));
 		}
 		
 		
@@ -199,7 +199,7 @@ public class EvaluFc {
 			if(adres.length==0) mywei[i]=0;
 			else if((i==6)||(i==1)){
 				emwei[i]=10*Math.min((4-adres[0]), (4-adres[1]));
-			}else emwei[i]=12*Math.min((4-adres[0]), (4-adres[1]));
+			}else emwei[i]=10*Math.min((4-adres[0]), (4-adres[1]));
 		}
 		for(i=1;i<7;i++) res-=emwei[i];
 		
@@ -210,24 +210,24 @@ public class EvaluFc {
 		if((tab[0][0]<-1)&&(tab[0][0]>-6))
 			res+=48;
 		if((tab[0][0]==-1)||(tab[0][0]==-6))
-			res+=32;
+			res+=48;
 		//check shell
 		if((tab[0][1]<0)&&(tab[0][1]<0)) {
 			res+=25;
 		}else if((tab[0][1]<0)||(tab[0][1]<0)){
-			res+=20;
+			res+=25;
 		}
 		
 		
 		if((tab[4][4]>1)&&(tab[4][4]<6))
 			res-=48;
 		if((tab[4][4]==-1)||(tab[4][4]==-6))
-			res-=32;
+			res-=48;
 		//check shell
 		if((tab[4][3]<0)&&(tab[3][4]<0)) {
 			res-=25;
 		}else if((tab[4][3]<0)||(tab[3][4]<0)){
-			res-=20;
+			res-=25;
 		}
 		
 		
@@ -246,7 +246,7 @@ public class EvaluFc {
 			int x=adres[0],y=adres[1];
 			int fg=1;
 			if(tab[x-1][y-1]==-1||tab[x-1][y-1]==-6) 
-				res+=10;
+				res+=12;
 			else if (tab[x-1][y-1]<0) {
 				res-=1;
 				fg =0;
@@ -293,7 +293,7 @@ public class EvaluFc {
 				int x=adres[0],y=adres[1];
 				int fg=1;
 				if(tab[x-1][y-1]==-1||tab[x-1][y-1]==-6) 
-					res+=5;
+					res+=6;
 				else if (tab[x-1][y-1]<0) {
 					res-=1;
 					fg =0;
