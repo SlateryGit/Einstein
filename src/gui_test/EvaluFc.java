@@ -2,7 +2,7 @@ package gui_test;
 
 public class EvaluFc {
 	//用于做 静态局面分析
-	public int[][] tab;//存放期盼数据
+	private int[][] tab;//存放期盼数据
 	public EvaluFc(int[][] tab1) {
 		// TODO Auto-generated constructor stub
 		tab = new int[5][5];
@@ -33,7 +33,7 @@ public class EvaluFc {
 					c++;
 		return c;
 	}
-	//查看 cs棋子的位置,没有返回null
+	//查看 cs棋子的位置,没有返回0length
 	public int[] checkcs(int cs) {
 		int i,j;
 		int adrs[]=new int[2];
@@ -64,6 +64,83 @@ public class EvaluFc {
 		}
 		
 		return ret;
+	}
+	
+	public int checknearcs(boolean isleft,int cs) {
+		//查看特定棋子周围是否有棋子
+		if((Math.abs(cs))==0||Math.abs(cs)>6) {
+			return 0;
+		}
+		if (cs>0) {//people
+			if (isleft) {
+				if(checkcs(cs-1).length>0) {
+					return 2;
+				}else if(cs==1){//查看1的左边
+					return 0;
+				}else {
+					return checknearcs(isleft, cs-1);
+				}
+			}else {//看右边
+				if(checkcs(cs+1).length>0) {
+					return 2;
+				}else if(cs==6){//查看1的左边
+					return 0;
+				}else {
+					return checknearcs(isleft, cs+1);
+				}
+			}
+			
+			
+		}else if (cs<0) {//ai
+			if (isleft) {//ai cs 's left
+				if(checkcs(cs+1).length>0) {
+					return 2;
+				}else if(cs==-1){//查看-1的左边
+					return 0;
+				}else {
+					return checknearcs(isleft, cs+1);
+				}
+			}else {//看右边
+				if(checkcs(cs-1).length>0) {
+					return 2;
+				}else if(cs==-6){//查看1的左边
+					return 0;
+				}else {
+					return checknearcs(isleft, cs-1);
+				}
+			}
+		}
+		
+		
+		
+		return 0;
+	}
+	
+	
+	public int reflex() {
+		int point=1,rex=0;
+		int[] adr=new int[2];
+		for(;point<7;point++) {
+			adr=checkcs(-1*point);
+			if(adr.length!=0) {
+				//对于该点数 可直接对应一个棋子
+				rex+=2;
+			}else {
+				rex+=checknearcs(false, -1*point)+checknearcs(true, -1*point);
+			}
+		}
+		int rival_rex=0;
+		for(point=1;point<7;point++) {
+			adr=checkcs(point);
+			if(adr.length!=0) {
+				//对于该点数 可直接对应一个棋子
+				rival_rex+=2;
+			}else {
+				rival_rex+=checknearcs(false, point)+checknearcs(true, point);
+			}
+		}
+		
+		return rex-rival_rex;
 	}
 	public int Eva(boolean isme,int[][] table ){
 		//isme=true ai（负数代表的）的局面评估
@@ -251,4 +328,11 @@ public class EvaluFc {
 		return res;
 	}
 
+	
+	
+	
 }
+
+
+
+

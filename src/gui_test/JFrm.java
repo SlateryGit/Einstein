@@ -53,13 +53,13 @@ public class JFrm extends JFrame implements ActionListener{
 		m=new Matrix_test(1);
 		m.print();
 		ct = new EvaluFc(m.tab);
-		System.out.println(ct.Eva(true, m.tab));
+		System.out.println(ct.reflex());
 		
 		m=new Matrix_test(2);
 		m.print();
 		ct = new EvaluFc(m.tab);
-		System.out.println(ct.Eva(true, m.tab));
-		
+		System.out.println(ct.reflex());
+		/*
 		m=new Matrix_test(3);
 		m.print();
 		ct = new EvaluFc(m.tab);
@@ -82,7 +82,7 @@ public class JFrm extends JFrame implements ActionListener{
 		System.out.println(ct.Eva(true, m.tab));
 		
 		
-		
+		*/
 		
 		
 		//new

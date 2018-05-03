@@ -62,11 +62,11 @@ public class Matrix_test {
 	public Matrix_test(int i) {
 		tab=new int[5][5];
 		if(i==1) {
-		tab[0][0]=-1;
+		//tab[0][0]=-1;
 		tab[0][1]=-2;
 		tab[0][2]=-5;
-		tab[1][0]=-6;
-		tab[1][1]=-4;
+		//tab[1][0]=-6;
+		//tab[1][1]=-4;
 		tab[3][1]=-3;
 		
 		tab[2][3]=1;
@@ -87,8 +87,8 @@ public class Matrix_test {
 			tab[4][4]=6;
 			tab[4][3]=4;
 			tab[4][2]=5;
-			tab[2][4]=2;
-			tab[3][3]=3;
+			//tab[2][4]=2;
+			//tab[3][3]=3;
 		}else if (i==3) {
 			tab[0][0]=-1;
 			tab[0][1]=-2;
