@@ -1,3 +1,4 @@
+
 package gui_test;
 
 public class EvaluFc {
@@ -186,8 +187,8 @@ public class EvaluFc {
 			adres=checkcs(i);
 			if(adres.length==0) mywei[-1*i]=0;
 			else if((i==-6)||(i==-1)){
-				mywei[-1*i]=10*Math.min((adres[0]), (adres[1]));
-			}else mywei[-1*i]=10*Math.min((adres[0]), (adres[1]));
+				mywei[-1*i]=10*Math.min((adres[0]), (adres[1]))+10;
+			}else mywei[-1*i]=10*Math.min((adres[0]), (adres[1]))+10;
 		}
 		
 		
@@ -198,8 +199,8 @@ public class EvaluFc {
 			adres=checkcs(i);
 			if(adres.length==0) mywei[i]=0;
 			else if((i==6)||(i==1)){
-				emwei[i]=10*Math.min((4-adres[0]), (4-adres[1]));
-			}else emwei[i]=10*Math.min((4-adres[0]), (4-adres[1]));
+				emwei[i]=10*Math.min((4-adres[0]), (4-adres[1]))+10;
+			}else emwei[i]=10*Math.min((4-adres[0]), (4-adres[1]))+10;
 		}
 		for(i=1;i<7;i++) res-=emwei[i];
 		
