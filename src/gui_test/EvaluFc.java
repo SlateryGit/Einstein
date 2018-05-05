@@ -242,36 +242,41 @@ public class EvaluFc {
 		}
 		
 		adres=checkcs(-1*maxcs);
-		if(adres[0]*adres[1]>0) {//棋子不在边界
-			int x=adres[0],y=adres[1];
-			int fg=1;
-			if(tab[x-1][y-1]==-1||tab[x-1][y-1]==-6) 
-				res+=12;
-			else if (tab[x-1][y-1]<0) {
-				res-=1;
-				fg =0;
-			}else {
-				res+=12;
-			}
-			if(fg==1) {//斜上有援助
-				if(tab[x-1][y]<0||tab[x][y-1]<0) {
-					res+=6;
-					if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
-						res+=2;
+		if(adres.length>0) {
+			if(adres[0]*adres[1]>0) {//棋子不在边界
+				int x=adres[0],y=adres[1];
+				int fg=1;
+				if(tab[x-1][y-1]==-1||tab[x-1][y-1]==-6) 
+					res+=12;
+				else if (tab[x-1][y-1]<0) {
+					res-=1;
+					fg =0;
+				}else {
+					res+=12;
 				}
-				
-			}else {
-				if(tab[x-1][y]<0||tab[x][y-1]<0) {
-					res+=5;
-					if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
-						res+=15;
+				if(fg==1) {//斜上有援助
+					if(tab[x-1][y]<0||tab[x][y-1]<0) {
+						res+=6;
+						if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
+							res+=2;
+					}
+					
+				}else {
+					if(tab[x-1][y]<0||tab[x][y-1]<0) {
+						res+=5;
+						if((tab[x-1][y]<0)&&(tab[x][y-1]<0))
+							res+=15;
+					}
+					
 				}
-				
+		
+			}else {
+					res-=20;
 			}
-	
-		}else {
-				res-=20;
 		}
+		
+		
+		
 		if(mychess>1) {
 			//算第二大
 			int v;
